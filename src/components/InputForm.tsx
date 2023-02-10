@@ -27,6 +27,8 @@ function InputForm({ onDispatch }: Props) {
       completed: false,
     };
 
+    if (newTodo.title === '') return;
+
     addTodo(newTodo, onDispatch);
 
     inputRef.current.value = '';
