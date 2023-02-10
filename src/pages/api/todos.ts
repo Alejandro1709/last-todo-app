@@ -15,5 +15,14 @@ export default async function handler(
     });
 
     res.status(201).json(todo);
+  } else if (req.method === 'DELETE') {
+    const { id } = req.body;
+    await prisma.todo.delete({
+      where: {
+        id: parseInt(id),
+      },
+    });
+
+    res.status(200).json({ message: 'Todo deleted' });
   }
 }

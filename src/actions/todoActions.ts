@@ -1,7 +1,6 @@
 import { Dispatch } from 'react';
 import { type ACTIONTYPE } from '@/reducers/todoReducers';
 import type ITodo from '@/types/todo';
-import todos from '@/data';
 
 export const addTodo = (todo: ITodo, dispatch: Dispatch<ACTIONTYPE>) => {
   dispatch({ type: 'ADD_TODO_REQUEST' });
@@ -33,5 +32,30 @@ export const setTodo = (todo: ITodo, dispatch: Dispatch<ACTIONTYPE>) => {
   } catch (error) {
     console.log(error);
     dispatch({ type: 'SET_TODO_FAILURE', payload: error });
+  }
+};
+
+export const deleteTodo = async (
+  id: number,
+  dispatch: Dispatch<ACTIONTYPE>
+) => {
+  dispatch({ type: 'DELETE_TODO_REQUEST' });
+
+  try {
+    await fetch('/api/todos', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id }),
+    })
+      .then((res) => res.json())
+      .then(() => {
+        dispatch({ type: 'DELETE_TODO_SUCCESS', payload: id });
+      })
+      .catch((err) => dispatch({ type: 'DELETE_TODO_FAILURE', payload: err }));
+  } catch (error) {
+    console.log(error);
+    dispatch({ type: 'DELETE_TODO_FAILURE', payload: error });
   }
 };
