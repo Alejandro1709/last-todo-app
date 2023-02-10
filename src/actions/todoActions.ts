@@ -25,14 +25,13 @@ export const getTodos = (todos: ITodo[], dispatch: Dispatch<ACTIONTYPE>) => {
   }
 };
 
-export const getTodo = (slug: string, dispatch: Dispatch<ACTIONTYPE>) => {
-  dispatch({ type: 'GET_TODO_REQUEST' });
+export const setTodo = (todo: ITodo, dispatch: Dispatch<ACTIONTYPE>) => {
+  dispatch({ type: 'SET_TODO_REQUEST' });
 
   try {
-    const todo = todos.find((todo) => todo.slug === slug);
-    dispatch({ type: 'GET_TODO_SUCCESS', payload: todo });
+    dispatch({ type: 'SET_TODO_SUCCESS', payload: todo });
   } catch (error) {
     console.log(error);
-    dispatch({ type: 'GET_TODO_FAILURE', payload: error });
+    dispatch({ type: 'SET_TODO_FAILURE', payload: error });
   }
 };

@@ -1,12 +1,9 @@
 import Todo from './Todo';
 import type ITodo from '@/types/todo';
-import { type ITodoState } from '@/types/todo';
+import useTodos from '@/hooks/useTodos';
 
-type Props = {
-  state: ITodoState;
-};
-
-function Todos({ state }: Props) {
+function Todos() {
+  const { state } = useTodos();
   return (
     <ul className='flex flex-col justify-center gap-4 mt-4 md:mt-12'>
       {state.todos && state.todos.length > 0

@@ -13,7 +13,7 @@ export default function todosReducer(state = initialState, action: ACTIONTYPE) {
   switch (action.type) {
     case 'ADD_TODO_REQUEST':
     case 'GET_TODOS_REQUEST':
-    case 'GET_TODO_REQUEST':
+    case 'SET_TODO_REQUEST':
       return {
         ...state,
         loading: true,
@@ -30,7 +30,7 @@ export default function todosReducer(state = initialState, action: ACTIONTYPE) {
         loading: false,
         todos: action.payload,
       };
-    case 'GET_TODO_SUCCESS':
+    case 'SET_TODO_SUCCESS':
       return {
         ...state,
         loading: false,
@@ -38,7 +38,7 @@ export default function todosReducer(state = initialState, action: ACTIONTYPE) {
       };
     case 'ADD_TODO_FAILURE':
     case 'GET_TODOS_FAILURE':
-    case 'GET_TODO_FAILURE':
+    case 'SET_TODO_FAILURE':
       return {
         ...state,
         todos: [],

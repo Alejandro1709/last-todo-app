@@ -1,18 +1,18 @@
-import { useEffect, useReducer } from 'react';
-import todosReducer, { initialState } from '@/reducers/todoReducers';
+import { useEffect } from 'react';
 import { prisma } from '@/utils/prisma';
 import Container from '@/components/Container';
 import InputForm from '@/components/InputForm';
 import Layout from '@/components/Layout';
 import Todos from '@/components/Todos';
 import { getTodos } from '@/actions/todoActions';
+import useTodos from '@/hooks/useTodos';
 
 type Props = {
   todos: string;
 };
 
 export default function Home({ todos }: Props) {
-  const [state, dispatch] = useReducer(todosReducer, initialState);
+  const { dispatch } = useTodos();
 
   useEffect(() => {
     getTodos(JSON.parse(todos), dispatch);
@@ -21,8 +21,8 @@ export default function Home({ todos }: Props) {
   return (
     <Layout title='Todo App | Dashboard'>
       <Container>
-        <Todos state={state} />
-        <InputForm onDispatch={dispatch} />
+        <Todos />
+        <InputForm />
       </Container>
     </Layout>
   );

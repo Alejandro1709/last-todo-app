@@ -1,11 +1,10 @@
 import { useRef } from 'react';
 import { addTodo } from '@/actions/todoActions';
+import useTodos from '@/hooks/useTodos';
 
-type Props = {
-  onDispatch: (action: { type: string; payload?: string }) => void;
-};
+function InputForm() {
+  const { dispatch } = useTodos();
 
-function InputForm({ onDispatch }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,7 +31,7 @@ function InputForm({ onDispatch }: Props) {
     })
       .then((res) => res.json())
       .then((res) => {
-        addTodo(res, onDispatch);
+        addTodo(res, dispatch);
       })
       .catch((err) => console.log(err));
 
