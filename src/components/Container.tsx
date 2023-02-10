@@ -4,7 +4,7 @@ type Props = {
 
 function Container({ children }: Props) {
   return (
-    <section className='flex flex-col gap-4 container md:p-0 md:mx-auto px-4 bg-green-200'>
+    <section className='flex flex-col gap-4 container md:p-0 md:mx-auto px-4'>
       {children}
     </section>
   );
