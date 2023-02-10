@@ -4,3 +4,10 @@ export default interface ITodo {
   slug?: string;
   completed?: boolean;
 }
+
+export interface ITodoState {
+  todos: ITodo[];
+  loading: boolean;
+  todo: ITodo | null;
+  error: string | null;
+}
