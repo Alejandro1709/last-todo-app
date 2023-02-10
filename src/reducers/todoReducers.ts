@@ -1,4 +1,3 @@
-import todos from '@/data';
 import { type ITodoState } from '@/types/todo';
 
 export type ACTIONTYPE = { type: string; payload?: any };

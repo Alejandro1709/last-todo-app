@@ -1,6 +1,5 @@
-import { addTodo } from '@/actions/todoActions';
-import ITodo from '@/types/todo';
 import { useRef } from 'react';
+import { addTodo } from '@/actions/todoActions';
 
 type Props = {
   onDispatch: (action: { type: string; payload?: string }) => void;
@@ -15,21 +14,27 @@ function InputForm({ onDispatch }: Props) {
     inputRef.current.value = e.target.value;
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!inputRef.current) return;
 
-    const newTodo: ITodo = {
-      id: Math.floor(Math.random() * 100000000),
+    const data = {
       title: inputRef.current.value,
-      slug: inputRef.current.value.toLowerCase().replace(/ /g, '-'),
-      completed: false,
     };
 
-    if (newTodo.title === '') return;
-
-    addTodo(newTodo, onDispatch);
+    await fetch('/api/todos', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        addTodo(res, onDispatch);
+      })
+      .catch((err) => console.log(err));
 
     inputRef.current.value = '';
   };
