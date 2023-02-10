@@ -5,7 +5,7 @@ export type ACTIONTYPE = { type: string; payload?: any };
 
 export const initialState: ITodoState = {
   loading: false,
-  todos: todos,
+  todos: [],
   todo: null,
   error: null,
 };

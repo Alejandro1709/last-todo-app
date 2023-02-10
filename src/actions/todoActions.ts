@@ -14,6 +14,17 @@ export const addTodo = (todo: ITodo, dispatch: Dispatch<ACTIONTYPE>) => {
   }
 };
 
+export const getTodos = (todos: ITodo[], dispatch: Dispatch<ACTIONTYPE>) => {
+  dispatch({ type: 'GET_TODOS_REQUEST' });
+
+  try {
+    dispatch({ type: 'GET_TODOS_SUCCESS', payload: todos });
+  } catch (error) {
+    console.log(error);
+    dispatch({ type: 'GET_TODOS_FAILURE', payload: error });
+  }
+};
+
 export const getTodo = (slug: string, dispatch: Dispatch<ACTIONTYPE>) => {
   dispatch({ type: 'GET_TODO_REQUEST' });
 
