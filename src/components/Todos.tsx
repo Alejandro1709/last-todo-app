@@ -1,12 +1,18 @@
-import todos from '@/data';
 import Todo from './Todo';
+import type ITodo from '@/types/todo';
+import { type ITodoState } from '@/types/todo';
 
-function Todos() {
+type Props = {
+  state: ITodoState;
+};
+
+function Todos({ state }: Props) {
+  console.log('Todos.tsx: state', state.todos);
   return (
     <ul className='flex flex-col justify-center gap-4 mt-4 md:mt-12'>
-      {todos.map((todo) => (
-        <Todo key={todo.id} todo={todo} />
-      ))}
+      {state.todos && state.todos.length > 0
+        ? state.todos.map((todo: ITodo) => <Todo key={todo.id} todo={todo} />)
+        : null}
     </ul>
   );
 }
